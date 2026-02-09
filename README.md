@@ -13,26 +13,6 @@ It was developed as part of an **internship curriculum** to understand Maven pro
 - Lombok
 - Git & GitHub
 
----
-
-## Project Structure
-maven-practice
-│
-├── src
-│ ├── main
-│ │ └── java
-│ │ └── com.practice
-│ │ ├── App.java
-│ │ └── DataModels.java
-│ │
-│ └── test
-│ └── java
-│ └── com.practice
-│ └── AppTest.java
-│
-├── pom.xml
-└── README.md
-
 
 ---
 
@@ -61,7 +41,7 @@ These plugins help in compiling code, running tests, executing the application, 
 
 ## How to Build and Run the Project
 
-### 1. Compile the Project
+1. Compile the Project
 ```bash
 mvn compile
 2. Run Unit Tests
