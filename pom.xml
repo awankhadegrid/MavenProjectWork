@@ -19,7 +19,7 @@
     </properties>
 
 
-
+<!--its a java testing framework dependency -->
   <dependencies>
       <dependency>
           <groupId>junit</groupId>
