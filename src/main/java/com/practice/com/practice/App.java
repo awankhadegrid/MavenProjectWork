@@ -20,4 +20,17 @@ public class App
     public int testMethod(){
         return 10;
     }
+    public void checkBugs(){
+        System.out.println("no  bugs");
+    }
+
+    public void pmdcheck(){
+        try {
+            int a=20;
+            int ans=a/0;
+            System.out.println(ans);
+        }catch (Exception e){
+            System.out.println("no worries");
+        }
+    }
 }

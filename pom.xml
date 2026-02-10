@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <groupId>com.practice</groupId>
-  <artifactId>maven-practice</artifactId>
-  <version>1.0-SNAPSHOT</version>
+    <modelVersion>4.0.0</modelVersion>
 
-  <name>maven-practice</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+    <groupId>com.practice</groupId>
+    <artifactId>maven-practice</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>maven-practice</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,118 +19,132 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
+    <!-- Dependencies -->
+    <dependencies>
 
-<!--its a java testing framework dependency -->
-  <dependencies>
-      <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>4.13.2</version>
-          <scope>test</scope>
-      </dependency>
+        <!-- JUnit for testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
 
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
 
-      <!-- Source: https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-      <dependency>
-          <groupId>org.projectlombok</groupId>
-          <artifactId>lombok</artifactId>
-          <version>1.18.30</version>
-          <scope>provided</scope>
-      </dependency>
+    </dependencies>
 
+    <build>
 
+        <plugins>
 
-  </dependencies>
+            <!-- Compiler plugin -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+            </plugin>
 
-  <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
-      <plugins>
-        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.1.0</version>
-        </plugin>
-        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.22.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
-        </plugin>
-        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
+            <!-- Surefire for tests -->
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.1</version>
+            </plugin>
 
-<!--   here we added executable plugin so we can directly run program with this command      -->
-<!--       mvn exec:java   -->
-          <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>exec-maven-plugin</artifactId>
-              <version>3.1.0</version>
-              <configuration>
-                  <mainClass>com.practice.App</mainClass>
-              </configuration>
-          </plugin>
+            <!-- Checkstyle is use for the checking our code style with rule that we have to add in the xml file  -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <failOnViolation>true</failOnViolation>
+                </configuration>
+            </plugin>
+<!--            it create an PMD report in that we can see our code mistakes like bad code and other things  -->
+<!--            in the target folder and in site pmd.html-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.21.0</version>
+                <configuration>
+                    <failOnViolation>true</failOnViolation>
+                    <printFailingErrors>true</printFailingErrors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
 
-<!--this plugin tell java which main class use to run after package then we can run our jar  -->
-<!--        java -jar target/maven-practice-1.0-SNAPSHOT.jar   -->
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-jar-plugin</artifactId>
-              <version>3.3.0</version>
-              <configuration>
-                  <archive>
-                      <manifest>
-                          <mainClass>com.practice.App</mainClass>
-                      </manifest>
-                  </archive>
-              </configuration>
-          </plugin>
+            <!-- SpotBugs it will detect the bugs and it will generate the reports-->
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.8.3.0</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <effort>Max</effort>
+                    <threshold>Low</threshold>
+                    <htmlOutput>true</htmlOutput>
+                    <failOnError>true</failOnError>
+                </configuration>
+            </plugin>
 
-          <!--            we can check bugs by the................. mvn spotbugs:check-->
-          <!--  for checking the reports we have to do...... mvn clean compile spotbugs:spotbugs-->
-          <plugin>
-              <groupId>com.github.spotbugs</groupId>
-              <artifactId>spotbugs-maven-plugin</artifactId>
-              <version>4.8.3.0</version>
+            <!-- Exec plugin (run app from CLI) -->
+            <!--   here we added executable plugin so we can directly run program with this command      -->
+            <!--       mvn exec:java   -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>com.practice.App</mainClass>
+                </configuration>
+            </plugin>
 
-              <configuration>
-                  <effort>Max</effort>
-                  <threshold>Low</threshold>
+            <!-- Jar plugin -->
+            <!--this plugin tell java which main class use to run after package then we can run our jar  -->
+            <!--        java -jar target/maven-practice-1.0-SNAPSHOT.jar   -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.practice.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
 
-                  <htmlOutput>true</htmlOutput>
-                  <xmlOutput>false</xmlOutput>
-                  <failOnError>false</failOnError>
-              </configuration>
-          </plugin>
+        </plugins>
 
+    </build>
 
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>
