@@ -111,6 +111,23 @@
               </configuration>
           </plugin>
 
+          <!--            we can check bugs by the................. mvn spotbugs:check-->
+          <!--  for checking the reports we have to do...... mvn clean compile spotbugs:spotbugs-->
+          <plugin>
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs-maven-plugin</artifactId>
+              <version>4.8.3.0</version>
+
+              <configuration>
+                  <effort>Max</effort>
+                  <threshold>Low</threshold>
+
+                  <htmlOutput>true</htmlOutput>
+                  <xmlOutput>false</xmlOutput>
+                  <failOnError>false</failOnError>
+              </configuration>
+          </plugin>
+
 
       </plugins>
     </pluginManagement>
