@@ -21,7 +21,9 @@ public class App
         return 10;
     }
     public void checkBugs(){
-        System.out.println("no  bugs");
+        System.out.println(
+                " no"
+        );
     }
 
     public void pmdcheck(){
